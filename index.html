@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simple local task reminder app with categories" />
+  <title>Task Reminder</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✅</text></svg>" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>✅ Task Reminder</h1>
+      <p class="subtitle">All data stays in your browser (localStorage)</p>
+    </header>
+
+    <section class="add-task">
+      <form id="task-form">
+        <div class="form-row">
+          <input type="text" id="task-title" placeholder="What needs to be done?" required maxlength="200" autocomplete="off" />
+        </div>
+        <div class="form-row form-grid">
+          <select id="task-category" required>
+            <option value="">Category</option>
+            <option value="morning">🌅 Morning Task</option>
+            <option value="night">🌙 Night Task</option>
+            <option value="todo">📋 To Do</option>
+            <option value="buy">🛒 To Buy</option>
+            <option value="good">✨ Good to Have</option>
+            <option value="reminder">⏰ Reminder</option>
+          </select>
+          <select id="task-priority" required>
+            <option value="medium">Priority: Medium</option>
+            <option value="high">Priority: High</option>
+            <option value="low">Priority: Low</option>
+          </select>
+          <input type="datetime-local" id="task-due" title="Due date & time (optional)" />
+        </div>
+        <div class="form-row">
+          <textarea id="task-notes" placeholder="Notes (optional)" rows="2" maxlength="500"></textarea>
+        </div>
+        <div class="form-row actions">
+          <button type="submit" class="btn btn-primary">Add Task</button>
+          <button type="button" id="clear-completed" class="btn btn-secondary">Clear Completed</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="filters">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="morning">Morning</button>
+        <button class="filter-btn" data-filter="night">Night</button>
+        <button class="filter-btn" data-filter="todo">To Do</button>
+        <button class="filter-btn" data-filter="buy">To Buy</button>
+        <button class="filter-btn" data-filter="good">Good to Have</button>
+        <button class="filter-btn" data-filter="reminder">Reminders</button>
+      </div>
+      <div class="filter-group secondary">
+        <button class="filter-btn" data-status="all">All Status</button>
+        <button class="filter-btn" data-status="active">Active</button>
+        <button class="filter-btn" data-status="completed">Completed</button>
+      </div>
+    </section>
+
+    <section class="stats" id="stats">
+      <span id="stat-total">0 tasks</span>
+      <span id="stat-active">0 active</span>
+      <span id="stat-completed">0 done</span>
+    </section>
+
+    <main class="task-list" id="task-list">
+      <!-- tasks rendered here -->
+    </main>
+
+    <footer class="footer">
+      <p>Data is stored only in this browser. Export / Import available.</p>
+      <div class="footer-actions">
+        <button id="export-btn" class="btn btn-outline">Export JSON</button>
+        <label class="btn btn-outline">
+          Import JSON
+          <input type="file" id="import-input" accept=".json" hidden />
+        </label>
+        <button id="clear-all-btn" class="btn btn-danger">Clear All</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
